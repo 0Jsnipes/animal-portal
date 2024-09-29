@@ -1,11 +1,13 @@
 // Login.js
 
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate(); // Initialize navigate
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,8 +15,8 @@ const Login = () => {
       setError('Please fill in all fields.');
     } else {
       setError('');
-      // Handle login logic (e.g., send login request to API)
-      console.log('Login submitted', { email, password });
+      // Navigate to the Profile page after successful login
+      navigate('/profile');
     }
   };
 
@@ -72,8 +74,7 @@ const styles = {
     marginBottom: '15px',
   },
   input: {
-    alignItems:'center',
-    width: '75%',
+    width: '100%',
     padding: '10px',
     borderRadius: '4px',
     border: '1px solid #ccc',
