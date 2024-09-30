@@ -1,7 +1,7 @@
-// Profile.js
+// src/Profile.js
 
 import React from 'react';
- // Import the CSS file for styling
+import { Link } from 'react-router-dom';
 
 const Profile = () => {
   const animal = {
@@ -9,20 +9,11 @@ const Profile = () => {
     weight: '18lbs',
     age: 2,
     breed: 'Boxer',
-    image: 'https://via.placeholder.com/150', // Replace this with actual image URL
+    image: 'https://via.placeholder.com/150', // Replace with actual image URL
   };
 
   return (
     <div style={styles.container}>
-      {/* Top Navigation */}
-      <nav style={styles.nav}>
-        <ul style={styles.navList}>
-          <li style={styles.navItem}>Messages</li>
-          <li style={styles.navItem}>Visits</li>
-          <li style={styles.navItem}>Vaccines</li>
-        </ul>
-      </nav>
-
       {/* Animal Profile */}
       <div style={styles.profile}>
         <div style={styles.profileImage}>
@@ -51,24 +42,6 @@ const styles = {
     height: '100vh',
     backgroundColor: '#f0f0f0',
   },
-  nav: {
-    width: '100%',
-    backgroundColor: '#333',
-    padding: '10px 0',
-  },
-  navList: {
-    display: 'flex',
-    justifyContent: 'center',
-    listStyle: 'none',
-    margin: 0,
-    padding: 0,
-  },
-  navItem: {
-    margin: '0 15px',
-    color: '#fff',
-    cursor: 'pointer',
-    fontSize: '18px',
-  },
   profile: {
     backgroundColor: '#fff',
     padding: '20px',
@@ -89,6 +62,19 @@ const styles = {
   },
   info: {
     fontSize: '16px',
+  },
+  navigation: {
+    marginTop: '20px',
+    display: 'flex',
+    justifyContent: 'space-around',
+    width: '100%',
+  },
+  navLink: {
+    backgroundColor: '#4CAF50',
+    color: '#fff',
+    padding: '10px 15px',
+    borderRadius: '5px',
+    textDecoration: 'none',
   },
 };
 
