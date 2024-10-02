@@ -1,6 +1,5 @@
-// src/Messages.js
-
 import React, { useState } from 'react';
+import styles from './MessageStyles'; // Import styles from the separate file
 
 const Messages = () => {
   const veterinarians = ['Dr. Smith', 'Dr. Adams', 'Dr. Johnson']; // Sample veterinarians
@@ -18,9 +17,9 @@ const Messages = () => {
   const [showNewMessageForm, setShowNewMessageForm] = useState(false);
   const [newMessage, setNewMessage] = useState({ subject: '', content: '' });
 
+  // Send message and clear the input fields
   const handleSendMessage = () => {
     if (newMessage.subject && newMessage.content.trim()) {
-      // Add the new message to the selected veterinarian's thread
       setThreads({
         ...threads,
         [selectedVet]: [
@@ -31,6 +30,24 @@ const Messages = () => {
       setNewMessage({ subject: '', content: '' });
       setShowNewMessageForm(false);
     }
+  };
+
+  // Prepare to reply with a preset subject
+  const handleReply = (subject) => {
+    setNewMessage({ subject: `Re: ${subject}`, content: '' });
+    setShowNewMessageForm(true);
+  };
+
+  // Reset the form when "Cancel" is clicked
+  const handleCancel = () => {
+    setNewMessage({ subject: '', content: '' });
+    setShowNewMessageForm(false);
+  };
+
+  // Start a new message (reset form fields)
+  const handleNewMsg = () => {
+    setNewMessage({ subject: '', content: '' });
+    setShowNewMessageForm(true);
   };
 
   return (
@@ -65,7 +82,7 @@ const Messages = () => {
             <div style={styles.emailBody}>
               <p>{msg.content}</p>
               <p style={styles.time}>{msg.time}</p>
-              <button onClick={()=>setShowNewMessageForm(true)} style={styles.newMessageButton}>Reply</button>
+              <button onClick={() => handleReply(msg.subject)} style={styles.replyButton}>Reply</button>
             </div>
           </div>
         ))}
@@ -73,12 +90,12 @@ const Messages = () => {
 
       {/* New Message Button */}
       {!showNewMessageForm && (
-        <button onClick={() => setShowNewMessageForm(true)} style={styles.newMessageButton}>
+        <button onClick={handleNewMsg} style={styles.newMessageButton}>
           New Message
         </button>
       )}
 
-      {/* New Message Form */}
+      {/* New Message / Reply Form */}
       {showNewMessageForm && (
         <div style={styles.newMessageForm}>
           <input
@@ -95,92 +112,11 @@ const Messages = () => {
             style={styles.textarea}
           />
           <button onClick={handleSendMessage} style={styles.sendButton}>Send</button>
-          <button onClick={() => setShowNewMessageForm(false)} style={styles.cancelButton}>Cancel</button>
+          <button onClick={handleCancel} style={styles.cancelButton}>Cancel</button>
         </div>
       )}
     </div>
   );
-};
-
-const styles = {
-  container: {
-    padding: '20px',
-  },
-  vetSelect: {
-    marginBottom: '20px',
-  },
-  select: {
-    padding: '10px',
-    marginLeft: '10px',
-  },
-  messageList: {
-    border: '1px solid #ccc',
-    padding: '10px',
-    marginBottom: '20px',
-    maxHeight: '300px',
-    overflowY: 'scroll',
-  },
-  messageItem: {
-    marginBottom: '20px',
-    padding: '10px',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-    backgroundColor: '#f9f9f9',
-  },
-  emailHeader: {
-    borderBottom: '1px solid #ddd',
-    marginBottom: '10px',
-  },
-  emailBody: {
-    fontSize: '14px',
-  },
-  time: {
-    fontSize: '12px',
-    color: '#999',
-  },
-  newMessageButton: {
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    padding: '10px 20px',
-    borderRadius: '5px',
-    border: 'none',
-    cursor: 'pointer',
-    marginBottom: '20px',
-  },
-  newMessageForm: {
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  input: {
-    padding: '10px',
-    marginBottom: '10px',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-  },
-  textarea: {
-    padding: '10px',
-    marginBottom: '10px',
-    border: '1px solid #ddd',
-    borderRadius: '5px',
-    minHeight: '100px',
-  },
-  sendButton: {
-    backgroundColor: '#4CAF50',
-    color: '#fff',
-    padding: '10px 15px',
-    borderRadius: '5px',
-    border: 'none',
-    cursor: 'pointer',
-    marginBottom: '10px',
-  },
-  cancelButton: {
-    backgroundColor: '#f44336',
-    color: '#fff',
-    padding: '10px 15px',
-    borderRadius: '5px',
-    border: 'none',
-    cursor: 'pointer',
-  },
 };
 
 export default Messages;

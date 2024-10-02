@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { Link } from 'react-router-dom';
+//import styles from './MessageStyles';
 
 const Profile = () => {
   const animal = {
@@ -31,8 +32,6 @@ const Profile = () => {
     </div>
   );
 };
-
-// Styles for the Profile page
 const styles = {
   container: {
     display: 'flex',
@@ -40,7 +39,9 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     height: '100vh',
-    backgroundColor: '#f0f0f0',
+    backgroundImage: `url('https://media-be.chewy.com/wp-content/uploads/2014/11/07120701/Puppys-First-Vet-Visit.jpg')`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
   },
   profile: {
     backgroundColor: '#fff',

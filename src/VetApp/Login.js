@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import styles from './LoginStyles'; // Import the styles from a separate file
 
 const Login = ({ setIsLoggedIn, setIsAdmin }) => {
   const [email, setEmail] = useState('');
@@ -11,7 +12,7 @@ const Login = ({ setIsLoggedIn, setIsAdmin }) => {
 
   const adminCredentials = {
     email: 'admin@example.com',
-    password: 'adminpassword'
+    password: 'adminpassword',
   };
 
   const handleSubmit = (e) => {
@@ -34,62 +35,29 @@ const Login = ({ setIsLoggedIn, setIsAdmin }) => {
 
   return (
     <div style={styles.container}>
-      <h2 style={styles.header}>Login</h2>
-      <form onSubmit={handleSubmit} style={styles.form}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          style={styles.input}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          style={styles.input}
-        />
-        {error && <p style={styles.error}>{error}</p>}
-        <button type="submit" style={styles.button}>Login</button>
-      </form>
+      <div style={styles.formContainer}>
+        <h2 style={styles.header}>Vet Portal</h2>
+        <form onSubmit={handleSubmit} style={styles.form}>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            style={styles.input}
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            style={styles.input}
+          />
+          {error && <p style={styles.error}>{error}</p>}
+          <button type="submit" style={styles.button}>Login</button>
+        </form>
+      </div>
     </div>
   );
-};
-
-const styles = {
-  header: {
-    display:'flex',
-    align:'center',
-    flexDirection:'row',
-    padding:'50px'
-  },
-  container: {
-    padding: '20px',
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    maxWidth: '300px',
-    margin: '0 auto',
-  },
-  input: {
-    margin: '10px 0',
-    padding: '10px',
-    borderRadius: '5px',
-    border: '1px solid #ccc',
-  },
-  button: {
-    padding: '10px',
-    borderRadius: '5px',
-    backgroundColor: '#28a745',
-    color: '#fff',
-    border: 'none',
-    cursor: 'pointer',
-  },
-  error: {
-    color: 'red',
-  },
 };
 
 export default Login;
